@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  database:
+    image: postgres:16.0-bookworm
+    container_name: simbirgo-postgres
+    volumes:
+      - ./data/postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    ports:
+      - "${POSTGRES_EXTERNAL_PORT}:5432"
+    networks:
+      - simbirgo-network
+    restart: always
+
+  users:
+    build: ./
+    ports:
+      - "${API_EXTERNAL_PORT}:8000"
+    environment:
+      - db_dsn=postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database:5432/${POSTGRES_DB}
+    command: ["monolit", "run"]
+
+networks:
+  simbirgo-network:

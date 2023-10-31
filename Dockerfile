@@ -12,8 +12,6 @@ FROM core as full
 
 RUN poetry install --with dev --all-extras
 COPY ./simbirgo/ /app/simbirgo
-COPY ./autotests /app/autotests
-COPY ./tests /app/tests
 ENTRYPOINT ["poetry", "run"]
 
 # Only application
@@ -21,4 +19,4 @@ FROM core as slim
 
 RUN poetry install --only main --all-extras
 COPY ./simbirgo /app/simbirgo
-ENTRYPOINT ["poetry", "run", "python", "-m", "simbirgo"]
+ENTRYPOINT ["poetry", "run", "python", "-m", "simbirgo", "monolit" "database" "migrations" "migrate", ";", "poetry", "run", "python", "-m", "simbirgo"]

@@ -1,0 +1,13 @@
+*.db
+*.pyc
+*.sqlite3
+.env
+.idea
+.pytest_cache
+.venv
+__pycache__
+broker_data
+database_data
+redis_data
+pyrightconfig.json
+.vscode
