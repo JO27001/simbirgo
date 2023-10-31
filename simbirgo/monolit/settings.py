@@ -13,7 +13,7 @@ refresh_token = generate_rsa_keys()
 class MonolitSettings(BaseAPISettings, BaseDatabaseSettings, JWTSettings):
     model_config = SettingsConfigDict(secrets_dir="/run/secrets")
 
-    db_dsn: AnyUrl = AnyUrl("sqlite+aiosqlite:///monolit.sqlite3")
+    db_dsn: AnyUrl = AnyUrl("postgresql+asyncpg://simbirgo:simbirgo@database:5432/simbirgo")
 
 
 def get_settings() -> MonolitSettings:

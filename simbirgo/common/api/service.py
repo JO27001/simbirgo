@@ -30,16 +30,16 @@ class BaseAPIService(ServiceMixin):
         app = fastapi.FastAPI(
             title=self._title,
             version=self._version,
-            root_url=self._root_url,
-            root_path=self._root_path,
+            # root_url=self._root_url,
+            # root_path=self._root_path,
         )
-        app.add_middleware(
-            CORSMiddleware,
-            allow_origins=list(self._allowed_origins),
-            allow_credentials=True,
-            allow_methods=["*"],
-            allow_headers=["*"],
-        )
+        # app.add_middleware(
+        #     CORSMiddleware,
+        #     allow_origins=list(self._allowed_origins),
+        #     allow_credentials=True,
+        #     allow_methods=["*"],
+        #     allow_headers=["*"],
+        # )
         app.service = self
         self.setup_app(app=app)
 
